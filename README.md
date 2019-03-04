@@ -1,4 +1,1 @@
-# my
-# my
-# my
-# my
+Hello, Git!
