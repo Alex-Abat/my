@@ -24,6 +24,6 @@ urlpatterns = [
     url(r'^signup/$', include('qa.urls')),
     url(r'^question/\d+/$', include('qa.urls')),
     url(r'^ask/$', include('qa.urls')),
-    url(r'^popular/$', popular,
+    url(r'^popular/$', popular),
     url(r'^new/$', include('qa.urls')),
 ]
