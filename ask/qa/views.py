@@ -34,6 +34,6 @@ def question(request, num):
     except Question.DoesNotExist:
         raise Http404
     return render(request, 'question.html',{
-        'question': q
+        'q': q
     })
 

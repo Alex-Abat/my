@@ -19,6 +19,8 @@ class Question(models.Model):
     author = models.ForeignKey(User)
     likes = models.ManyToManyField(User, related_name='question_like_user')
     objects = QuestionManager()
+    def __str__(self):
+        return self.title
 
 class Answer(models.Model):
     text = models.TextField()

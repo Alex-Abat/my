@@ -5,10 +5,10 @@
 	<meta charset="utf-8">
 </head>
 <body>
-	<h2>{{ question.title }}</h2>
-	<p>{{ question.text }}</p>
+	<h2>{{ q }}</h2>
+	<p>{{ q.text }}</p>
 	<ul>
-	{% for answer in question.answer_set.all %}
+	{% for answer in q.answer_set.all %}
 		<li>{{ answer }}</li>
 	{% endfor %}
 	</ul>
