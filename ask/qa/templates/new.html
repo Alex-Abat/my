@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Questions</title>
+</head>
+<body>
+	<ul>
+    {% for p in page %}
+    	<li>
+    		<a href="{{ paginator.baseurl }}{{ p.id }}">
+    			{{ p.title }}	
+    		</a>
+    	</li>	
+    {% endfor %}
+    </ul> 
+</body>
