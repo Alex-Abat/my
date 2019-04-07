@@ -1,6 +1,6 @@
 from django.http import HttpResponse, Http404
 from django.core.paginator import Paginator
-from qa.models import Question
+from qa.models import Question, Answer
 from django.shortcuts import render
 
 # Create your views here.
@@ -33,9 +33,9 @@ def question(request, num):
         q = Question.objects.get(id=num)
     except Question.DoesNotExist:
         raise Http404
-    answ = q.Answer_set.all()
+    a = Answer.objects.all().filter(question=q)
     return render(request, 'question.html',{
         'q': q,
-        'a': answ
+        'a': a,
     })
 

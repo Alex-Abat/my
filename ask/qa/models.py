@@ -10,8 +10,6 @@ class QuestionManager(models.Manager):
         return self.order_by('-added_at')
     def popular(self):
         return self.order_by('-rating')
-    def get_answers(self, question):
-        return Answer.objects.filter(question=question)
 
 class Question(models.Model):
     title = models.CharField(max_length=255)
@@ -25,7 +23,10 @@ class Question(models.Model):
         return self.title
 
 class Answer(models.Model):
-    text = models.TextField()
-    #added_at = models.DateTimeField(auto_now_add=True)
-    question = models.ForeignKey(Question)
-    author = models.ForeignKey(User)
+    text = models.TextField(default=None, null=True, blank=True)
+    added_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    question = models.ForeignKey(Question, null=True, default=True, blank=True)
+    author = models.ForeignKey(User, null=True, default=None, blank=True)
+    class Meta:
+        db_table="qaanswer"
+        ordering=['-added_at']
