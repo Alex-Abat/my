@@ -25,7 +25,7 @@ def popular(request):
     paginator.baseurl = '/question/'
     return render(request, 'list.html',{
         'page':      page.object_list,
-        'paginator': paginator 
+        'paginator': paginator
 
     })
 def question(request, num):
@@ -33,7 +33,26 @@ def question(request, num):
         q = Question.objects.get(id=num)
     except Question.DoesNotExist:
         raise Http404
+    if request.method == "POST":
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            form._user = request.user
+            post = form.save()
+            url = post.get_url()
+            return HttpResponseRedirect(url)
+    else form = AskForm()
     return render(request, 'question.html',{
-        'q': q
+        'q': q,
+        'form': form,
     })
 
+def ask(request):
+    if request.method == "POST":
+        form = AddPostForm(request.GET)
+        if form.is_valid():
+            post = form.save()
+            url = post.get_url()
+            return HttpResponseRedirect(url)
+    else:
+        form = AskForm()
+    return render(request, 'ask.html', {'form':form,})
