@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from qa.views import new, popular, question 
+from qa.views import new, popular, question, ask 
 
 urlpatterns = [
     url(r'^$', new),
@@ -24,6 +24,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/', include('qa.urls')),
     url(r'^signup/', include('qa.urls')),
-    url(r'^ask/', include('qa.urls')),
+    url(r'^ask/', ask),
     url(r'^new/', include('qa.urls')),
 ]

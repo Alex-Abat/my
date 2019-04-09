@@ -16,11 +16,14 @@ class Question(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField(auto_now_add=True)
     rating = models.IntegerField(default=0)
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(User, null=True)
     likes = models.ManyToManyField(User, related_name='question_like_user')
     objects = QuestionManager()
     def __str__(self):
         return self.title
+    
+    def get_url(self):
+	return "/question/{}/.format
 
 class Answer(models.Model):
     text = models.TextField(default=None, null=True, blank=True)

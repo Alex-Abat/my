@@ -1,6 +1,7 @@
-from django.http import HttpResponse, Http404
+from django.http import HttpResponseRedirect, Http404
 from django.core.paginator import Paginator
 from qa.models import Question, Answer
+from qa.forms import AskForm, AnswerForm
 from django.shortcuts import render
 
 # Create your views here.
@@ -40,19 +41,18 @@ def question(request, num):
             post = form.save()
             url = post.get_url()
             return HttpResponseRedirect(url)
-    else form = AskForm()
-    return render(request, 'question.html',{
-        'q': q,
-        'form': form,
+    else:
+        form = AnswerForm()
     a = Answer.objects.all().filter(question=q)
     return render(request, 'question.html',{
         'q': q,
         'a': a,
+        'form': form
     })
 
 def ask(request):
     if request.method == "POST":
-        form = AddPostForm(request.GET)
+        form = AskForm(request.POST)
         if form.is_valid():
             post = form.save()
             url = post.get_url()
