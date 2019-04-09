@@ -8,8 +8,8 @@
 	<h2>{{ q }}</h2>
 	<p>{{ q.text }}</p>
 	<ul>
-	{% for answer in q.answer_set.all %}
-		<li>{{ answer }}</li>
+	{% for answer in a %}
+		<li>{{ answer.text }}</li>
 	{% endfor %}
 	</ul>
     <form method="post" action="/question/{{ q.id }}">
