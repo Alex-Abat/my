@@ -23,7 +23,7 @@ class Question(models.Model):
         return self.title
     
     def get_url(self):
-	return "/question/{}/.format
+        return "/question/{}/".format(self.id)
 
 class Answer(models.Model):
     text = models.TextField(default=None, null=True, blank=True)
