@@ -18,6 +18,7 @@ def new(request):
     return render(request, 'list.html', {
         'paginator': paginator,
         'page':      page.object_list
+        'user': request.user,
     })
 def popular(request):
     limit = 10
@@ -28,7 +29,7 @@ def popular(request):
     return render(request, 'list.html',{
         'page':      page.object_list,
         'paginator': paginator
-
+        'user' : request.user,
     })
 def question(request, num):
     try:
@@ -55,12 +56,16 @@ def ask(request):
     if request.method == "POST":
         form = AskForm(request.POST)
         if form.is_valid():
+            form._user = request.user
             post = form.save()
             url = post.get_url()
             return HttpResponseRedirect(url)
     else:
         form = AskForm()
-    return render(request, 'ask.html', {'form':form,})
+    return render(request, 'ask.html', {
+        'form':form
+        'user': request.user,
+    })
 
 def login(request):
     if request.method == "POST":
