@@ -17,7 +17,7 @@ def new(request):
     paginator.baseurl = '/question/'
     return render(request, 'list.html', {
         'paginator': paginator,
-        'page':      page.object_list
+        'page':      page.object_list,
         'user': request.user,
     })
 def popular(request):
@@ -28,7 +28,7 @@ def popular(request):
     paginator.baseurl = '/question/'
     return render(request, 'list.html',{
         'page':      page.object_list,
-        'paginator': paginator
+        'paginator': paginator,
         'user' : request.user,
     })
 def question(request, num):
@@ -63,11 +63,11 @@ def ask(request):
     else:
         form = AskForm()
     return render(request, 'ask.html', {
-        'form':form
+        'form':form,
         'user': request.user,
     })
 
-def login(request):
+def login1(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
         form.is_valid()
@@ -79,7 +79,7 @@ def login(request):
         form = LoginForm()
     return render(request, 'login.html', {'form': form})
 
-def signup(request):
+def signup1(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
@@ -87,4 +87,4 @@ def signup(request):
             login(request, user)
             return HttpResponseRedirect('/')
     else: form = SignupForm()
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'signup.html', {'form': form})

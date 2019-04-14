@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+	<meta charset="utf-8">
+</head>
+<body>
+    <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+        {{ field }}
+    {% endfor %}
+    <button type="submit">login</button>
+    </form>
+</body>
+</html>
