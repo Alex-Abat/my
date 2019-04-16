@@ -86,5 +86,6 @@ def signup1(request):
             user = form.save()
             login(request, user)
             return HttpResponseRedirect('/')
-    else: form = SignupForm()
+    else:
+        form = SignupForm()
     return render(request, 'signup.html', {'form': form})

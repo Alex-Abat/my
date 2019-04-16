@@ -97,3 +97,6 @@ class LoginForm(forms.Form):
         if not user.check_password(password):
             raise forms.ValidationError('Неверное имя пользователя или пароль2')
 
+    def save(self):
+        auth = authenticate(**self.cleaned_data)
+        return auth
