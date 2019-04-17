@@ -7,9 +7,11 @@
 <body>
 	<h2>{{ q }}</h2>
 	<p>{{ q.text }}</p>
+        <p>{{ q.author }}</p>
 	<ul>
 	{% for answer in a %}
 		<li>{{ answer.text }}</li>
+                <li>{{ answer.author }}</li>
 	{% endfor %}
 	</ul>
     <form method="post" action="/question/{{ q.id }}">

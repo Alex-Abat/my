@@ -53,19 +53,25 @@ def question(request, num):
     })
 
 def ask(request):
-    if request.method == "POST":
-        form = AskForm(request.POST)
-        if form.is_valid():
+    user = request.user
+    if user.is_authenticated():
+        if request.method == "POST":
+            form = AskForm(request.POST)
             form._user = request.user
-            post = form.save()
-            url = post.get_url()
-            return HttpResponseRedirect(url)
+            if form.is_valid():
+                post = form.save()
+                url = post.get_url()
+                return HttpResponseRedirect(url)
+        else:
+            form = AskForm()
+        return render(request, 'ask.html', {
+            'form':form,
+            'user': request.user,
+        })
+
     else:
-        form = AskForm()
-    return render(request, 'ask.html', {
-        'form':form,
-        'user': request.user,
-    })
+        form = LoginForm()
+        return render(request, 'login.html', {'form': form})
 
 def login1(request):
     if request.method == "POST":
